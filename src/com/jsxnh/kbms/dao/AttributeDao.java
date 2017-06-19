@@ -22,7 +22,7 @@ public class AttributeDao extends BaseDao{
 	}
 	
 	public void deleteAttribute(Integer id){
-		String sql="delete * from attribute where id=?";
+		String sql="delete  from attribute where id=?";
 		getJdbcTemplate().update(sql, id);
 	}
 	
@@ -34,5 +34,15 @@ public class AttributeDao extends BaseDao{
 	public List<Attribute> findAttributebyId(Integer id){
 		String sql="select * from attribute where id=?";
 		return getJdbcTemplate().query(sql, new AttributeMapper());
+	}
+	
+	
+	public Attribute findAttributeByattribute(String attribute){
+		String sql="select * from attribute where attribute=?";
+		List<Attribute> attributes=getJdbcTemplate().query(sql, new Object[]{attribute}, new AttributeMapper());
+		if(attributes.size()>0){
+			return attributes.get(0);
+		}
+		return null;
 	}
 }

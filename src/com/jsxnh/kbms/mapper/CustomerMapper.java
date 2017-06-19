@@ -18,7 +18,7 @@ public class CustomerMapper implements RowMapper<Customer>{
 		cus.setName(res.getString(3));
 		cus.setAge(res.getInt(4));
 		cus.setSex(res.getInt(5));
-		cus.setTel(res.getInt(6));
+		cus.setTel(res.getString(6));
 		cus.setEmail(res.getString(7));
 		cus.setGrade_id(res.getInt(8));
 		cus.setDomian_id(res.getInt(9));

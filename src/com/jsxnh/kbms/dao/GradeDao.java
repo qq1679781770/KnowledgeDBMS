@@ -16,7 +16,7 @@ public class GradeDao extends BaseDao{
 	}
 	
 	public void deleteGrade(Integer id){
-		String sql="delete * from grade where id=?";
+		String sql="delete from grade where id=?";
 		getJdbcTemplate().update(sql, id);
 	}
 	
@@ -39,4 +39,11 @@ public class GradeDao extends BaseDao{
 		return null;
 	}
 	
+	public Grade findGradeById(Integer id){
+		String sql="select * from grade where id=?";
+		if(getJdbcTemplate().query(sql, new Object[]{id}, new GradeMapper()).size()>0){
+			return getJdbcTemplate().query(sql, new Object[]{id}, new GradeMapper()).get(0);
+		}
+		return null;
+	}
 }

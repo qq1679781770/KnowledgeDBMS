@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-
 import com.jsxnh.kbms.entities.Module;
 import com.jsxnh.kbms.mapper.ModuleMapper;
 
@@ -32,8 +31,14 @@ public class ModuleDao extends BaseDao{
 		getJdbcTemplate().update(sql, domain_id,create_id,new Date(),id);
 	}
 	
+	public void update(Module module){
+		String sql="update module set domain_id=?,description=?,module=?,create_id=?,last_time=? where id=?";
+		getJdbcTemplate().update(sql, module.getDomain_id(),module.getDescription(),module.getModule(),module.getCreate_id(),
+				                      module.getLast_time(),module.getId());
+	}
+	
 	public void deleteModule(Integer id){
-		String sql="delete * from module where id=?";
+		String sql="delete  from module where id=?";
 		getJdbcTemplate().update(sql, id);
 	}
 	
@@ -41,4 +46,28 @@ public class ModuleDao extends BaseDao{
 		String sql="select * from module";
 		return getJdbcTemplate().query(sql, new ModuleMapper());
 	}
+	
+	public Module findModulebymodule(String module){
+		String sql="select * from module where module=?";
+		List<Module> modules=getJdbcTemplate().query(sql, new Object[]{module}, new ModuleMapper());
+		if(modules.size()>0){
+			return modules.get(0);
+		}
+		return null;
+	}
+	
+	public Module findModulebyId(Integer id){
+		String sql="select * from module where id=?";
+		List<Module> modules=getJdbcTemplate().query(sql, new Object[]{id}, new ModuleMapper());
+		if(modules.size()>0){
+			return modules.get(0);
+		}
+		return null;
+	}
+	
+	public List<Module> findModuleByDomain(Integer domain_id){
+		String sql="select * from module where domain_id=?";
+		return getJdbcTemplate().query(sql, new Object[]{domain_id}, new ModuleMapper());
+	}
+	
 }

@@ -7,7 +7,7 @@ public class Customer {
 	private String name;
 	private Integer sex;
 	private Integer age;
-	private Integer tel;
+	private String tel;
 	private String email;
 	private Integer domain_id;
 	private Integer grade_id;
@@ -43,10 +43,10 @@ public class Customer {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
-	public Integer getTel() {
+	public String getTel() {
 		return tel;
 	}
-	public void setTel(Integer tel) {
+	public void setTel(String tel) {
 		this.tel = tel;
 	}
 	public String getEmail() {

@@ -27,7 +27,7 @@ public class RelationDao extends BaseDao{
 	}
 	
 	public void deleteRelation(Integer id){
-		String sql="delete * from relation where id=?";
+		String sql="delete  from relation where id=?";
 		getJdbcTemplate().update(sql, id);
 	}
 	

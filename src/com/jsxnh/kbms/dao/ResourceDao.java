@@ -33,7 +33,7 @@ public class ResourceDao extends BaseDao{
 	}
 	
 	public void deleteResource(Integer id){
-		String sql="delete * from id=?";
+		String sql="delete from resource where id=?";
 		getJdbcTemplate().update(sql, id);
 	}
 	
@@ -42,4 +42,23 @@ public class ResourceDao extends BaseDao{
 		return getJdbcTemplate().query(sql, new ResourceMapper());
 	}
 	
+	
+	public List<Resource> listResourceBydomain_id(Integer domain_id){
+		String sql="select * from resource where domain_id=?";
+		return getJdbcTemplate().query(sql, new Object[]{domain_id}, new ResourceMapper());
+	}
+	
+	public List<Resource> listResourceBymodule_id(Integer module_id){
+		String sql="select * from resource where module_id=?";
+		return getJdbcTemplate().query(sql, new Object[]{module_id}, new ResourceMapper());
+	}
+	
+	public Resource findResourceByid(Integer id){
+		String sql="select * from resource where id=?";
+		List<Resource>  resources=getJdbcTemplate().query(sql, new Object[]{id}, new ResourceMapper());
+		if(resources.size()>0){
+			return resources.get(0);
+		}
+		return null;
+	}
 }

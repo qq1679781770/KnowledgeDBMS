@@ -13,7 +13,7 @@ import com.jsxnh.kbms.hanpl.DocumentMapper;
 import com.jsxnh.kbms.hanpl.WordMapper;
 
 @Repository
-public class BaseDao {
+public class HanplBaseDao {
 
 	@Autowired
 	private JdbcTemplate jdbctemplate;

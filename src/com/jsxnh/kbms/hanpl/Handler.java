@@ -37,6 +37,12 @@ public class Handler {
 	private Seg seg;
 	public static String content="";
 	
+	
+	@RequestMapping("/hanpl")
+	public String Hanpl(){
+		return "hanpl";
+	}
+	
 	@RequestMapping(value="/fileupload",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
 	public @ResponseBody String uploadFile(MultipartFile file) throws IllegalStateException, IOException, ServletException{
 		String text="";

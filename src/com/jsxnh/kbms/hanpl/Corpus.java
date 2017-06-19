@@ -14,7 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.tokenizer.NLPTokenizer;
-import com.jsxnh.kbms.hanpl.BaseDao;
+import com.jsxnh.kbms.hanpl.HanplBaseDao;
 import com.jsxnh.kbms.hanpl.Document;
 import com.jsxnh.kbms.hanpl.Word;
 import com.jsxnh.kbms.hanpl.Myterm;
@@ -22,7 +22,7 @@ import com.jsxnh.kbms.hanpl.Myterm;
 public class Corpus {
 
 	ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext.xml");
-	BaseDao dao=ctx.getBean(BaseDao.class);
+	HanplBaseDao dao=ctx.getBean(HanplBaseDao.class);
 	
 	
 	public static void main(String[] args) {

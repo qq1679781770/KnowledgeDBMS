@@ -22,12 +22,17 @@ public class AtgDao extends BaseDao{
 	}
 	
 	public void deleteAtg(Integer id){
-		String sql="delete * from atg where id=?";
+		String sql="delete  from atg where id=?";
 		getJdbcTemplate().update(sql, id);
 	}
 	
 	public List<Atg> listAllAtg(){
 		String sql="select * from atg";
 		return getJdbcTemplate().query(sql, new AtgMapper());
+	}
+	
+	public List<Atg> findAtgBygrade(Integer grade_id){
+		String sql="select * from atg where grade_id=?";
+		return getJdbcTemplate().query(sql, new Object[]{grade_id},new AtgMapper());
 	}
 }

@@ -20,6 +20,8 @@ public class UncheckMapper implements RowMapper<Uncheck>{
 		uncheck.setCheck_time(res.getInt("check_time"));
 		uncheck.setIs_check(res.getInt("is_check"));
 		uncheck.setResource(res.getString("resource"));
+		uncheck.setTitle(res.getString("title"));
+		uncheck.setModule_id(res.getInt("module_id"));
 		return uncheck;
 	}
 

@@ -17,7 +17,7 @@ public class SauthorityDao extends BaseDao{
 	}
 	
 	public void deleteSauthority(Integer user_id,Integer authority_id){
-		String sql="delete * from sauthority where user_id=? and authority_id=?";
+		String sql="delete  from sauthority where user_id=? and authority_id=?";
 		getJdbcTemplate().update(sql, new Object[]{user_id,authority_id});
 	}
 	
@@ -30,4 +30,6 @@ public class SauthorityDao extends BaseDao{
 		String sql="select * from sauthority where user_id=?";
 		return getJdbcTemplate().query(sql,new Object[]{user_id},new SauthorityMapper());
 	}
+	
+	
 }

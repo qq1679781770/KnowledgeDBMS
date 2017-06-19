@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.summary.TextRankKeyword;
 import com.hankcs.hanlp.tokenizer.NLPTokenizer;
-import com.jsxnh.kbms.hanpl.BaseDao;
+import com.jsxnh.kbms.hanpl.HanplBaseDao;
 import com.jsxnh.kbms.hanpl.Myterm;
 
 
@@ -30,10 +30,10 @@ import jxl.write.biff.RowsExceededException;
 public class Seg {
 
 	@Autowired
-	private BaseDao basedao;
+	private HanplBaseDao hanplBaseDao;
 	
 	public Seg(){
-		basedao=new BaseDao();
+		hanplBaseDao=new HanplBaseDao();
 	}
 	
 	public String wordMark(String content){
@@ -54,7 +54,7 @@ public class Seg {
 
 	public String wordFrequency(String content){
 		JSONArray result=new JSONArray();
-		Integer totaldoc=basedao.getTotaldoc();
+		Integer totaldoc=hanplBaseDao.getTotaldoc();
 		List<Term> termlist=NLPTokenizer.segment(content);
 		HashMap<Myterm, Integer> termmap=new HashMap<Myterm, Integer>();
 		Integer  totalterm=termlist.size();
@@ -75,7 +75,7 @@ public class Seg {
 		for(Map.Entry<Myterm, Integer> entry:termmap.entrySet()){
 			Myterm term=entry.getKey();
 			Integer wordnum=entry.getValue();
-			Integer wordincludedoc=basedao.docsincludeofWord(term.getWord());
+			Integer wordincludedoc=hanplBaseDao.docsincludeofWord(term.getWord());
 			double rate=(double)wordnum/totalterm;
 			double tf_idf=rate*Math.log10((double)totaldoc/(double)(1+wordincludedoc));
 			JSONArray json=new JSONArray();

@@ -27,7 +27,7 @@ public class DomainDao extends BaseDao{
 	}
 	
 	public void deleteDomain(Integer id){
-		String sql="delete * from domain where id =?";
+		String sql="delete  from domain where id =?";
 		getJdbcTemplate().update(sql, id);
 	}
 	

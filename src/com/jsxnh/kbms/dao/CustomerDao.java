@@ -12,7 +12,7 @@ public class CustomerDao extends BaseDao{
 
 	public void addCustomer(Customer cus){
 		String sql="insert into customer values(?,?,?,?,?,?,?,?,?,?)";
-		getJdbcTemplate().update(sql, cus.getId(),cus.getPassword(),cus.getName(),cus.getAge(),cus.getTel(),cus.getEmail()
+		getJdbcTemplate().update(sql, cus.getId(),cus.getPassword(),cus.getName(),cus.getAge(),cus.getSex(),cus.getTel(),cus.getEmail()
 				,cus.getGrade_id(),cus.getDomian_id(),cus.getImage());
 	}
 	
@@ -47,7 +47,7 @@ public class CustomerDao extends BaseDao{
 	}
 	
 	public void deleteCustomer(Integer id){
-		String sql="delete * from where id=?";
+		String sql="delete  from where id=?";
 		getJdbcTemplate().update(sql, id);
 	}
 	

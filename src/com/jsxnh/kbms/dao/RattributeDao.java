@@ -28,12 +28,12 @@ public class RattributeDao extends BaseDao{
 	}
 	
 	public void deleteRattribute(Integer id){
-		String sql="delete * from where id=?";
+		String sql="delete  from rattribute where id=?";
 		getJdbcTemplate().update(sql, id);
 	}
 	
 	public List<Rattribute> findRattributeByResource(Integer resource_id){
-		String sql="select * from where resource_id=?";
+		String sql="select * from rattribute where resource_id=?";
 		return getJdbcTemplate().query(sql, new Object[]{resource_id},new RattributeMapper());
 	}
 	
@@ -42,4 +42,9 @@ public class RattributeDao extends BaseDao{
 		return getJdbcTemplate().query(sql, new RattributeMapper());
 	}
 
+	public List<Rattribute> findAattributeByattributeandvalue(Integer attribute_id,String value){
+		String sql="select * from rattribute where attribute_id=? and value like ?";
+		return getJdbcTemplate().query(sql, new Object[]{attribute_id,"%"+value+"%"}, new RattributeMapper());
+	}
+	
 }

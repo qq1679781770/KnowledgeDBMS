@@ -11,6 +11,20 @@ public class Uncheck {
 	private Integer check_time;
 	private Integer create_id;
 	private Date create_time;
+	private String title;
+	private Integer module_id;
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public Integer getModule_id() {
+		return module_id;
+	}
+	public void setModule_id(Integer module_id) {
+		this.module_id = module_id;
+	}
 	public Integer getId() {
 		return id;
 	}

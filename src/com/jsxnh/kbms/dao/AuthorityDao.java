@@ -16,7 +16,7 @@ public class AuthorityDao extends BaseDao{
 	}
 	
 	public void deleteAuthority(Integer id){
-		String sql="delete * from authority where id=?";
+		String sql="delete  from authority where id=?";
 		getJdbcTemplate().update(sql, id);
 	}
 	
@@ -31,4 +31,12 @@ public class AuthorityDao extends BaseDao{
 		return getJdbcTemplate().query(sql,new AuthorityMapper());
 	}
 	
+	public Authority findAuthorityByid(Integer id){
+		String sql="select * from authority where id=?";
+		List<Authority> authorities=getJdbcTemplate().query(sql, new Object[]{id}, new AuthorityMapper());
+		if(authorities.size()>0){
+			return authorities.get(0);
+		}
+		return null;
+	}
 }

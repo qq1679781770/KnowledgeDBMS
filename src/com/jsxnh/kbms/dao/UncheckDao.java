@@ -11,9 +11,9 @@ import com.jsxnh.kbms.mapper.UncheckMapper;
 public class UncheckDao extends BaseDao{
 
 	public void addUncheck(Uncheck uncheck){
-		String sql="insert into uncheck(resource,is_check,check_time,create_id,create_time,domain_id) values(?,?,?,?,?,?)";
+		String sql="insert into uncheck(resource,is_check,check_time,create_id,create_time,domain_id,title,module_id) values(?,?,?,?,?,?,?,?)";
 		getJdbcTemplate().update(sql, uncheck.getResource(),uncheck.getIs_check(),uncheck.getCheck_time(),
-				                   uncheck.getCreate_id(),uncheck.getCreate_time(),uncheck.getDomain_id());
+				                   uncheck.getCreate_id(),uncheck.getCreate_time(),uncheck.getDomain_id(),uncheck.getTitle(),uncheck.getModule_id());
 	}
 	
 	public void updatecheck_time(Integer id){
