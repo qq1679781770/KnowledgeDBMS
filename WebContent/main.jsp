@@ -108,6 +108,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     }
 	 				$('#iframe').attr("src","kbms/showmodifydomain");
 		 	    });
+
+	 			$('#addmodule').click(function(){
+	 				if($('#user').text()==' 未登录'){
+                        alert("请先登录");
+                        return;
+                    }
+	 				$('#iframe').attr("src","kbms/showaddmodule");
+		 	    });
+
+	 			$('#modifymodule').click(function(){
+	 				if($('#user').text()==' 未登录'){
+                        alert("请先登录");
+                        return;
+                    }
+	 				$('#iframe').attr("src","kbms/showmodifymodule");
+		 	    });
+		 	    
 			});
 			
         </script>
@@ -149,8 +166,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h5>模块管理</h5>
 		<div>
 			<ul>
-			<li><a href="javascript:(0)">添加</a></li>
-			<li><a href="javascript:(0)">修改</a></li>
+			<li><a href="javascript:(0)" id="addmodule">添加</a></li>
+			<li><a href="javascript:(0)"  id="modifymodule">修改</a></li>
 			</ul>
 		</div>
 		

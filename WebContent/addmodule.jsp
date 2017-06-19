@@ -1,0 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Insert title here</title>
+        <script src=<%=basePath+"js/jquery.min.js"%>></script>
+        <script src=<%=basePath+"js/bootstrap.min.js"%>></script>
+        <script src=<%=basePath+"js/jsxnh.js"%>></script>
+        <script src=<%= basePath+"js/vue.min.js"%>></script>
+        <link rel="stylesheet" href=<%=basePath+"css/bootstrap.min.css" %> />
+        <script type="text/javascript">
+
+              $(document).ready(function(){
+
+            	  var domains=${domains};
+            	  var vm=new Vue({
+                	  el:'#form',
+                	  data:{
+                    	  domains:domains,
+                    	  module:'',
+                    	  description:'',
+                    	  domain:domains[0]
+                     },
+                     methods:{
+                            add:function(){
+                                postJSON('<%=basePath+"kbms/addmodule"%>',{"module":this.module,"domain":this.domain,"description"
+                                             :this.description,"user_id":<%=session.getAttribute("user_id")%>},function(data){
+                                                 alert("添加成功");
+                                                 vm.module="";
+                                                 vm.description="";
+                                                 })
+                            }
+
+                         }
+                  });
+
+                  
+              });
+		
+        </script>
+</head>
+<body>
+<div style="height: 500px;width:1000px">
+
+<form id="form">
+   		<div class="form-group">
+            <label for="module">模块名</label>
+            <input type="text" class="form-control" id="module" v-model="module">
+        </div>
+        <div class="form-group">
+            <label for="description">定义</label>
+            <input type="text" class="form-control" id="description" v-model="description">
+        </div>
+        <div class="form-group">
+            <label for="select">所属领域</label>
+            <select id="select" class="form-control" v-model="domain">
+            	<option v-for="item in domains">{{ item }}</option>
+            </select>
+        </div>            
+        <button  class="btn btn-default" v-on:click="add">确认添加</button>
+   </form>
+
+</div>
+</body>
+</html>
