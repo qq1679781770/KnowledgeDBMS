@@ -12,12 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jsxnh.kbms.dao.DomainDao;
 import com.jsxnh.kbms.dao.ModuleDao;
 import com.jsxnh.kbms.entities.Authority;
+import com.jsxnh.kbms.entities.Domain;
 import com.jsxnh.kbms.entities.Module;
 import com.jsxnh.kbms.service.FindAuthorityService;
 
@@ -38,6 +40,12 @@ public class ModuleHandler {
 		for(Authority authority:authorities){
 			if(authority.getAuthority().equals("添加模块")){
 				model=new ModelAndView("addmodule");
+				JSONArray json=new JSONArray();
+				List<Domain> domains=domainDao.listAllDomain();
+				for(Domain domain:domains){
+					json.put(domain.getDomain());
+				}
+				model.addObject("domains", json.toString());
 				return model;
 			}
 		}
@@ -67,6 +75,19 @@ public class ModuleHandler {
 		for(Authority authority:authorities){
 			if(authority.getAuthority().equals("修改模块")){
 				model=new ModelAndView("modifymodule");
+				JSONArray json=new JSONArray();
+				List<Domain> domains=domainDao.listAllDomain();
+				for(Domain domain:domains){
+					json.put(domain.getDomain());
+				}
+				model.addObject("domains", json.toString());
+				
+				JSONArray json2=new JSONArray();
+				List<Module> modules=moduleDao.listAllModule();
+				for(Module module:modules){
+					json2.put(module.getId());
+				}
+ 				model.addObject("modules", json2.toString());
 				return model;
 			}
 		}
@@ -97,6 +118,16 @@ public class ModuleHandler {
 		for(Module module:modules){
 			json.put(module.getModule());
 		}
+		return json.toString();
+	}
+	
+	@RequestMapping(value="/findmodulebyid",method=RequestMethod.GET,produces="application/json;charset=UTF-8",consumes = "application/json")
+	public @ResponseBody String findModuleByid(@RequestParam("id") Integer id){
+		JSONObject json=new JSONObject();
+		Module module=moduleDao.findModulebyId(id);
+		json.put("module", module.getModule());
+		json.put("description", module.getDescription());
+		json.put("domain", domainDao.finddomainByid(module.getDomain_id()).getDomain());
 		return json.toString();
 	}
 }
