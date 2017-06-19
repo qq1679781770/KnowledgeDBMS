@@ -25,13 +25,13 @@ public class Interceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2) throws Exception {
 		// TODO Auto-generated method stub
-		
+		//System.out.println("拦截器");
 		String reqUrl=arg0.getRequestURI().replace(arg0.getContextPath(), "");  
-		if(reqUrl.equals("/register")||reqUrl.equals("/login")){
+		if(reqUrl.equals("/kbms/register")||reqUrl.equals("/kbms/login")){
 			return true;
 		}else{
-			if(arg0.getSession().getAttribute("user_id").equals(null)){
-				arg1.sendRedirect("/loginjsp");
+			if(arg0.getSession().getAttribute("user_id")==null||arg0.getSession().getAttribute("user_id").equals("")){
+				arg1.sendRedirect(arg0.getContextPath()+"/login");
 			}
 		}
 		return true;
