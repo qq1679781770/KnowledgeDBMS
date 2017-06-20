@@ -47,7 +47,7 @@ public class CustomerDao extends BaseDao{
 	}
 	
 	public void deleteCustomer(Integer id){
-		String sql="delete  from where id=?";
+		String sql="delete  from customer where id=?";
 		getJdbcTemplate().update(sql, id);
 	}
 	
@@ -58,5 +58,10 @@ public class CustomerDao extends BaseDao{
 			return true;
 		}
 		return false;
+	}
+	
+	public List<Customer> listAllusers(){
+		String sql="select * from customer";
+		return getJdbcTemplate().query(sql, new CustomerMapper());
 	}
 }

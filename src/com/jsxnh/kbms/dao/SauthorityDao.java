@@ -31,5 +31,17 @@ public class SauthorityDao extends BaseDao{
 		return getJdbcTemplate().query(sql,new Object[]{user_id},new SauthorityMapper());
 	}
 	
+	public Sauthority findSauthorityByuserandauthority(Integer user_id,Integer authority_id){
+		String sql="select * from sauthority where user_id=? and authority_id=?";
+		List<Sauthority> sauthorities=getJdbcTemplate().query(sql, new Object[]{user_id ,authority_id},new SauthorityMapper());
+		if(sauthorities.size()>0){
+			return sauthorities.get(0);
+		}
+		return null;
+	}
 	
+	public void updateSauthority(Integer user_id,Integer authority_id,Integer is_grant){
+		String sql="update sauthority set is_grant=? where user_id=? and authority_id=?";
+		getJdbcTemplate().update(sql, is_grant,user_id,authority_id);
+	}
 }

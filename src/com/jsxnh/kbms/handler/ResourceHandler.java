@@ -157,6 +157,7 @@ public class ResourceHandler {
 		}		
 		res.put("totalpage", pageService.findResourceBydomain(domainDao.finddomainBydomain(request.getParameter("domain")).getId()));
 		res.put("resources", pageService.findResourceBydomian(domainDao.finddomainBydomain(request.getParameter("domain")).getId(), id));
+		res.put("page", id);
 		return res.toString();
 	}
 	
@@ -180,6 +181,7 @@ public class ResourceHandler {
 		}		
 		res.put("totalpage", pageService.findResourceBymodule(moduleDao.findModulebymodule(request.getParameter("module")).getId()));
 		res.put("resources", pageService.findResourceBymodule(moduleDao.findModulebymodule(request.getParameter("module")).getId(), id));
+		res.put("page", id);
 		return res.toString();
 	}
 	
@@ -205,6 +207,7 @@ public class ResourceHandler {
 		String value=request.getParameter("value");
 		res.put("totalpage", pageService.findResourceByattribute(attribute, value));
 		res.put("resources", pageService.findResourceByattribute(attribute, value, id));
+		res.put("page", id);
 		return res.toString();
 	}
 	

@@ -124,7 +124,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     }
 	 				$('#iframe').attr("src","kbms/showmodifymodule");
 		 	    });
-		 	    
+
+
+	 			$('#allauthorities').click(function(){
+	 				$('#iframe').attr("src","showauthorities");
+		 	    });
+
+	 			$('#manageauthority').click(function(){
+	 				if($('#user').text()==' 未登录'){
+                        alert("请先登录");
+                        return;
+                    }
+	 				$('#iframe').attr("src","kbms/showmanageauthority");
+		 	    });
+
+	 			$('#alluser').click(function(){
+	 				if($('#user').text()==' 未登录'){
+                        alert("请先登录");
+                        return;
+                    }
+	 				$('#iframe').attr("src","kbms/showalluser/1");
+		 	    });
 			});
 			
         </script>
@@ -174,16 +194,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h5>权限管理</h5>
 		<div>
 			<ul>
-			<li><a href="javascript:(0)">所有权限</a></li>
-			<li><a href="javascript:(0)">所有等级</a></li>
-			<li><a href="javascript:(0)">权限和等级</a><li>
+			<li><a href="javascript:(0)" id="allauthorities">所有权限</a></li>
+			<li><a href="javascript:(0)" id="manageauthority">管理权限</a></li>
 			</ul>
 		</div>
 		
 		<h5>用户管理</h5>
 		<div>
 			<ul>
-			<li><a href="javascript:(0)">所有用户</a></li>
+			<li><a href="javascript:(0)" id="alluser">所有用户</a></li>
 			</ul>
 		</div>
 		

@@ -36,8 +36,14 @@ public class FindAuthorityService {
 		}
 		for(Sauthority sauthority:sauthorityDao.listSauthorityByUser(user_id)){
 			if(sauthority.getIs_grant()==1){
+				if(authorities.contains(authorityDao.findAuthorityByid(sauthority.getAuthority_id()))){
+					continue;
+				}
 				authorities.add(authorityDao.findAuthorityByid(sauthority.getAuthority_id()));
 			}else{
+				if(!authorities.contains(authorityDao.findAuthorityByid(sauthority.getAuthority_id()))){
+					continue;
+				}
 				authorities.remove(authorityDao.findAuthorityByid(sauthority.getAuthority_id()));
 			}
 		}

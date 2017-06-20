@@ -1,11 +1,14 @@
 package com.jsxnh.kbms.handler;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,18 +19,26 @@ import org.springframework.web.servlet.ModelAndView;
 import com.jsxnh.kbms.dao.CustomerDao;
 import com.jsxnh.kbms.dao.DomainDao;
 import com.jsxnh.kbms.dao.GradeDao;
+import com.jsxnh.kbms.dao.SauthorityDao;
+import com.jsxnh.kbms.entities.Authority;
 import com.jsxnh.kbms.entities.Customer;
 import com.jsxnh.kbms.entities.Domain;
+import com.jsxnh.kbms.service.FindAuthorityService;
+import com.jsxnh.kbms.service.PageService;
 
 @Controller
 public class UserHandler {
 
 	@Autowired
-	CustomerDao customerDao;
+	private CustomerDao customerDao;
 	@Autowired
-	DomainDao domainDao;
+	private DomainDao domainDao;
 	@Autowired
-	GradeDao gradeDao;
+	private GradeDao gradeDao;
+	@Autowired
+	private FindAuthorityService findAuthorityService;
+	@Autowired
+	private PageService pageService;
 	
 	
 	@RequestMapping(value="/register",produces="application/json;charset=UTF-8")
@@ -150,7 +161,7 @@ public class UserHandler {
 	@RequestMapping(value="/kbms/updategrade",method=RequestMethod.GET,produces="application/json;charset=UTF-8")
 	public @ResponseBody String updateGrade(@RequestParam("user_id") Integer user_id,@RequestParam("grade") Integer grade){
 		JSONArray res=new JSONArray();
-		customerDao.updateDomain(user_id,gradeDao.findGradeBygrade(grade).getId());
+		customerDao.updateGrade(user_id,gradeDao.findGradeBygrade(grade).getId());
 		res.put("Y");
 		return res.toString();
 	}
@@ -168,4 +179,45 @@ public class UserHandler {
 	public void Logout(HttpServletRequest request){
 		request.getSession().removeAttribute("user_id");
 	}
+	
+	@RequestMapping("/kbms/showalluser/{page}")
+	public ModelAndView showAlluser(HttpServletRequest request,@PathVariable("page") Integer page){
+		ModelAndView model;
+		List<Authority> authorities=findAuthorityService.findAuthority((Integer)request.getSession().getAttribute("user_id"));
+		for(Authority authority:authorities){
+			if(authority.getAuthority().equals("查看用户")){
+				model=new ModelAndView("showalluser");
+				model.addObject("is_modify", false);
+				model.addObject("is_delete", false);
+				model.addObject("is_manage", false);
+				for(Authority item:authorities){
+					if(item.getAuthority().equals("删除用户")){
+						model.addObject("is_delete", true);
+					}
+					if(item.getAuthority().equals("修改等级")){
+						model.addObject("is_modify", true);
+					}
+					if(item.getAuthority().equals("管理权限")){
+						model.addObject("is_manage", true);
+					}
+				}
+				model.addObject("totalpage", pageService.AllUser());
+				model.addObject("users", pageService.listUser(page));
+				model.addObject("page", page);
+				return model;
+			}
+		}
+		
+		model=new ModelAndView("error");
+		return model;
+	}
+	
+	@RequestMapping("/kbms/deleteuser/{id}")
+	public @ResponseBody String deleteUser(@PathVariable("id") Integer id){
+		customerDao.deleteCustomer(id);		
+		return new JSONArray().toString();
+	}
+	
+	
+	
 }

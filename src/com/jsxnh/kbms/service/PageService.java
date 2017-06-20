@@ -10,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jsxnh.kbms.dao.AttributeDao;
+import com.jsxnh.kbms.dao.CustomerDao;
 import com.jsxnh.kbms.dao.DomainDao;
+import com.jsxnh.kbms.dao.GradeDao;
 import com.jsxnh.kbms.dao.ModuleDao;
 import com.jsxnh.kbms.dao.RattributeDao;
 import com.jsxnh.kbms.dao.ResourceDao;
 import com.jsxnh.kbms.entities.Attribute;
+import com.jsxnh.kbms.entities.Customer;
 import com.jsxnh.kbms.entities.Rattribute;
 import com.jsxnh.kbms.entities.Resource;
 
@@ -31,6 +34,10 @@ public class PageService {
 	private ResourceDao resourceDao;
 	@Autowired
 	private RattributeDao rattributeDao;
+	@Autowired
+	private CustomerDao customerDao;
+	@Autowired
+	private GradeDao gradeDao;
 	
 	public Integer findResourceBydomain(Integer domain_id){
 		if(resourceDao.listResourceBydomain_id(domain_id).size()%8==0){
@@ -53,8 +60,8 @@ public class PageService {
 			json.put("resource", resources.get(i).getContent());
 			json.put("create_id", resources.get(i).getCreate_id());
 			json.put("last_time", new Date(resources.get(i).getLast_time().getTime()));
-			json.put("domain", domainDao.finddomainByid(resources.get(i).getId()).getDomain());
-			json.put("module", moduleDao.findModulebyId(resources.get(i).getId()).getModule());
+			json.put("domain", domainDao.finddomainByid(resources.get(i).getDomain_id()).getDomain());
+			json.put("module", moduleDao.findModulebyId(resources.get(i).getModule_id()).getModule());
 			res.put(json);
 		}
 		return res;
@@ -81,8 +88,8 @@ public class PageService {
 			json.put("resource", resources.get(i).getContent());
 			json.put("create_id", resources.get(i).getCreate_id());
 			json.put("last_time", new Date(resources.get(i).getLast_time().getTime()));
-			json.put("domain", domainDao.finddomainByid(resources.get(i).getId()).getDomain());
-			json.put("module", moduleDao.findModulebyId(resources.get(i).getId()).getModule());
+			json.put("domain", domainDao.finddomainByid(resources.get(i).getDomain_id()).getDomain());
+			json.put("module", moduleDao.findModulebyId(resources.get(i).getModule_id()).getModule());
 			res.put(json);
 		}
 		return res;
@@ -121,8 +128,36 @@ public class PageService {
 			json.put("resource", resources.get(i).getContent());
 			json.put("create_id", resources.get(i).getCreate_id());
 			json.put("last_time", new Date(resources.get(i).getLast_time().getTime()));
-			json.put("domain", domainDao.finddomainByid(resources.get(i).getId()).getDomain());
-			json.put("module", moduleDao.findModulebyId(resources.get(i).getId()).getModule());
+			json.put("domain", domainDao.finddomainByid(resources.get(i).getDomain_id()).getDomain());
+			json.put("module", moduleDao.findModulebyId(resources.get(i).getModule_id()).getModule());
+			res.put(json);
+		}
+		return res;
+	}
+	
+	
+	public Integer AllUser(){
+		List<Customer> customers=customerDao.listAllusers();
+		if(customers.size()%8==0){
+			return customers.size()/8;
+		}
+		return customers.size()/8+1;
+	}
+	
+	
+	public JSONArray listUser(Integer page){
+		JSONArray res=new JSONArray();
+		List<Customer> customers=customerDao.listAllusers();
+		int max=8*page;
+		if(8*page>customers.size()){
+			max=customers.size();
+		}
+		for(int i=8*(page-1);i<max;i++){
+			JSONObject json=new JSONObject();
+			json.put("id", customers.get(i).getId());
+			json.put("name", customers.get(i).getName());
+			json.put("grade", gradeDao.findGradeById(customers.get(i).getGrade_id()).getGrade());
+			json.put("domain", domainDao.finddomainByid(customers.get(i).getDomian_id()).getDomain());
 			res.put(json);
 		}
 		return res;

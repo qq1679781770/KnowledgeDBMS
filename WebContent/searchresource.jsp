@@ -31,6 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             vm2.totalpage=data.totalpage;
                             vm2.is_modify=data.is_modify;
                             vm2.is_delete=data.is_delete;
+                            vm2.page=data.page;
                          });
                   }
 
@@ -47,6 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                          vm2.totalpage=data.totalpage;
                          vm2.is_modify=data.is_modify;
                          vm2.is_delete=data.is_delete;
+                         vm2.page=data.page;
                       });
 
                  }
@@ -64,6 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         vm2.totalpage=data.totalpage;
                         vm2.is_modify=data.is_modify;
                         vm2.is_delete=data.is_delete;
+                        vm2.page=data.page;
                      });
                 }
                  
@@ -159,7 +162,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                          }
                          this.page=this.page+1;
                          search(this.page);
-                     }
+                     },
+                     topagef:function(){
+                    	 search(this.topage);
+                    	 
+                       }
                 }
 
                 
@@ -233,13 +240,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
     </div>
   </div>
-</div>
+     </div>
 	  <nav aria-label="...">
           <ul class="pager">
               <li id="previous"><a v-on:click="previous">Previous</a></li>
               <li>当前第{{ page }}页</li>
               <li><input type="text" v-model="topage"></input></li>
-              <li><button type="button">转到</button></li>
+              <li><button type="button" v-on:click="topagef">转到</button></li>
               <li>总共{{ totalpage }}页</li>
               <li id="next"><a v-on:click="next">Next</a></li>
          </ul>

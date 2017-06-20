@@ -16,7 +16,7 @@ public class AtgDao extends BaseDao{
 	}
 	
 	public void updateAtg(Atg atg){
-		String sql="update atg set grade_id=?,authority=?,create_id=?,last_time=? where id=?";
+		String sql="update atg set grade_id=?,authority_id=?,create_id=?,last_time=? where id=?";
 		getJdbcTemplate().update(sql, new Object[]{atg.getGrade_id(),atg.getAuthority_id(),atg.getCreate_id()
 				                 ,atg.getLast_time(),atg.getId()}); 
 	}
@@ -34,5 +34,10 @@ public class AtgDao extends BaseDao{
 	public List<Atg> findAtgBygrade(Integer grade_id){
 		String sql="select * from atg where grade_id=?";
 		return getJdbcTemplate().query(sql, new Object[]{grade_id},new AtgMapper());
+	}
+	
+	public void deleteAtg(Integer grade_id,Integer authority_id){
+		String sql="delete from atg where grade_id=? and authority_id=?";
+		getJdbcTemplate().update(sql, grade_id,authority_id);
 	}
 }

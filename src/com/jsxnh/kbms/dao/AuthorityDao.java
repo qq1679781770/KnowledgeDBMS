@@ -39,4 +39,14 @@ public class AuthorityDao extends BaseDao{
 		}
 		return null;
 	}
+	
+	public Authority findAuthorityByauthority(String authority){
+		String sql="select *  from authority where authority=?";
+		List<Authority> authorities=getJdbcTemplate().query(sql, new Object[]{authority}, new AuthorityMapper());
+		if(authorities.size()>0){
+			return authorities.get(0);
+		}
+		return null;
+	}
+	
 }
