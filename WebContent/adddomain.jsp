@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>       
         <button  class="btn btn-default" v-on:click="add">确认添加</button>
    </form>
-
+<script count="150" src=<%=basePath+ "js/canvas-nest.js"%>></script>
 </div>
 </body>
 </html>

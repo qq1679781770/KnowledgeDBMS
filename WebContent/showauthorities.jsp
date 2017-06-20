@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
 </head>
 <body>
-<div style="height:630px;width:1260px">
+<div style="height:630px;width:1200px">
 
 <table id="table" class="table table-bordered">
    <thead>
@@ -52,5 +52,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </table>
 
 </div>
+<script count="150" src=<%=basePath+ "js/canvas-nest.js"%>></script>
 </body>
 </html>

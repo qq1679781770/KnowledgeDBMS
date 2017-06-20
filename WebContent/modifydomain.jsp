@@ -78,6 +78,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </form>
 
 </div>
-
+<script count="150" src=<%=basePath+ "js/canvas-nest.js"%>></script>
 </body>
 </html>

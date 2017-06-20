@@ -145,6 +145,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     }
 	 				$('#iframe').attr("src","kbms/showalluser/1");
 		 	    });
+
+
+		 	    $('#checkresource').click(function(){
+		 	    	if($('#user').text()==' 未登录'){
+                        alert("请先登录");
+                        return;
+                    }
+	 				$('#iframe').attr("src","kbms/searchuncheck/1");
+			 	});
 			});
 			
         </script>
@@ -171,7 +180,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li><a href="javascript:(0)" id="searchresource">搜索</a></li>
 			<li><a href="javascript:(0)" id="uploadresource">上传</a></li>
 			<li><a href="javascript:(0)" id="addresource">添加</a></li>
-			<li><a href="javascript:(0)">审核</a></li>
+			<li><a href="javascript:(0)" id="checkresource">审核</a></li>
 			</ul>
 		</div>
 		
@@ -237,7 +246,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li class="col-md-3" id="logout"><a href="javascript:(0)">登出</a></li>
 		</ul>
 		</div>
-		<div  style="height: 200px;margin-top: 30px;background-color:#F8F8F8" >
+		<div  style="height: 200px;width:1200px;margin-top: 30px;background-color:#F8F8F8" >
 		    <br>
 			<p><h2 class="text-center" style="font-style: blue">知识库管理系统</h2></p>
 			<p class="text-center" >用户可自行添加，修改资源</p>
@@ -251,5 +260,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 </div>
+ <div style="background-color:#003333;margin-top:30px">
+            <div class="container">
+                <div style="margin-top:10px">
+                <ul class="row">
+                    <li class="col-md-3"><h4 style="color:white">链接</h4></li>
+                    <li class="col-md-2"><h4><a href="http://v3.bootcss.com/" target="_blank">Bootstrap</a></h4></li>
+                    <li class="col-md-2"><h4><a href="https://cn.vuejs.org/" target="_blank">Vue</a></h4></li>
+                     <li class="col-md-2"><h4><a href="http://spring.io/" target="_blank">Spring</a></h4></li>
+                    <li class="col-md-2"><h4><a href="https://github.com/qq1679781770/KnowledgeDBMS" target="_blank">源码</a></h4></li>                    
+                </ul>
+                 </div>
+                <div>
+                <p class="text-center" style="color:white">Powered by <a href="#">jsxnh</a>. Copyright &copy; 2017. Manage</p>
+                <p class="text-center" style="color:white"><a href="http://www.jianshixiaonanhai.com/" target="_blank">www.jianshixiaonanhai.com</a>. All rights reserved.</p>
+                </div>
+                </div>
+        </div>
+        <script count="300" src="js/canvas-nest.js"></script>
 </body>
 </html>

@@ -21,7 +21,7 @@ public class UncheckDao extends BaseDao{
 		List<Uncheck> unchecks=getJdbcTemplate().query(querysql, new Object[]{id},new UncheckMapper());
 		Integer times=unchecks.get(0).getCheck_time();
 		String sql="update uncheck set check_time=? where id=?";
-		getJdbcTemplate().update(sql, times,id);
+		getJdbcTemplate().update(sql, times+1,id);
 	}
 	
 	public void updateis_check(Integer id){
@@ -30,7 +30,7 @@ public class UncheckDao extends BaseDao{
 	}
 	
 	public List<Uncheck> listAllUncheck(){
-		String sql="select * from uncheck";
+		String sql="select * from uncheck where is_check=0";
 		return getJdbcTemplate().query(sql, new UncheckMapper());
 	}
 	

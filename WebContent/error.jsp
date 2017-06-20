@@ -14,8 +14,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <link rel="stylesheet" href=<%=basePath+"css/bootstrap.min.css" %> />
 </head>
 <body>
- <div class="alert alert-danger text-center" role="alert" style="height:100px">           
+ <div class="alert alert-danger text-center" role="alert" style="height:100px;width:1200px">           
                <h3>没有权限</h3>
   </div>
+  <script count="150" src=<%=basePath+ "js/canvas-nest.js"%>></script>
 </body>
 </html>

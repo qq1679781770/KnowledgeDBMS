@@ -29,4 +29,14 @@ public class CheckingDao extends BaseDao{
 		String sql="select * from checking";
 		return getJdbcTemplate().query(sql, new CheckingMapper());
 	}
+	
+	
+	public boolean existUncheck(Integer check_id,Integer user_id){
+		String sql="select * from checking where user_id=? and check_id=?";
+		if(getJdbcTemplate().query(sql, new Object[]{user_id,check_id},new CheckingMapper()).size()==0){
+			return false;
+		}else{
+			return true;
+		}
+	}
 }

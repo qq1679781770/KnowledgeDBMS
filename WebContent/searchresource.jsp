@@ -176,7 +176,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
 </head>
 <body>
-<div style="height:630px;width:1260px">
+<div style="height:630px;width:1200px">
 	<form id="form" class="form-inline">
 		<div class="form-group" style="margin-left: 400px">
            <label for="select1">搜索条件</label>
@@ -255,6 +255,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	
 </div>
-
+<script count="150" src=<%=basePath+ "js/canvas-nest.js"%>></script>
 </body>
 </html>

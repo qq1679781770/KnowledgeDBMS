@@ -10,16 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jsxnh.kbms.dao.AttributeDao;
+import com.jsxnh.kbms.dao.CheckingDao;
 import com.jsxnh.kbms.dao.CustomerDao;
 import com.jsxnh.kbms.dao.DomainDao;
 import com.jsxnh.kbms.dao.GradeDao;
 import com.jsxnh.kbms.dao.ModuleDao;
 import com.jsxnh.kbms.dao.RattributeDao;
 import com.jsxnh.kbms.dao.ResourceDao;
+import com.jsxnh.kbms.dao.UncheckDao;
 import com.jsxnh.kbms.entities.Attribute;
 import com.jsxnh.kbms.entities.Customer;
 import com.jsxnh.kbms.entities.Rattribute;
 import com.jsxnh.kbms.entities.Resource;
+import com.jsxnh.kbms.entities.Uncheck;
 
 @Service
 public class PageService {
@@ -38,6 +41,10 @@ public class PageService {
 	private CustomerDao customerDao;
 	@Autowired
 	private GradeDao gradeDao;
+	@Autowired
+	private UncheckDao uncheckDao;
+	@Autowired
+	private CheckingDao checkingDao;
 	
 	public Integer findResourceBydomain(Integer domain_id){
 		if(resourceDao.listResourceBydomain_id(domain_id).size()%8==0){
@@ -162,4 +169,47 @@ public class PageService {
 		}
 		return res;
 	}
+	
+	public Integer findUncheckResources(Integer user_id){
+		List<Uncheck> unchecks=uncheckDao.listAllUncheck();
+		List<Uncheck> res=new LinkedList<>();
+		for(Uncheck uncheck:unchecks){
+			if(!checkingDao.existUncheck(uncheck.getId(), user_id)){
+				res.add(uncheck);
+			}
+		}
+		if(res.size()%8==0){
+			return res.size()/8;
+		}
+		return res.size()/8+1;
+	}
+	
+	public JSONArray findUncheckResources(Integer user_id,Integer page){
+		List<Uncheck> unchecks=uncheckDao.listAllUncheck();
+		List<Uncheck> res=new LinkedList<>();
+		for(Uncheck uncheck:unchecks){
+			if(!checkingDao.existUncheck(uncheck.getId(), user_id)){
+				res.add(uncheck);
+			}
+		}
+		JSONArray json=new JSONArray();
+		int max=8*page;
+		if(8*page>res.size()){
+			max=res.size();
+		}
+		for(int i=8*(page-1);i<max;i++){
+			JSONObject item=new JSONObject();
+			item.put("id", res.get(i).getId());
+			item.put("resource", res.get(i).getResource());
+			item.put("title", res.get(i).getTitle());
+			item.put("domain", domainDao.finddomainByid(res.get(i).getDomain_id()).getDomain());
+			item.put("module", moduleDao.findModulebyId(res.get(i).getModule_id()).getModule());
+			item.put("check_time", res.get(i).getCheck_time());
+			json.put(item);
+		}
+		return json;
+		
+	}
+	
+	
 }

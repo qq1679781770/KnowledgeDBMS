@@ -57,7 +57,7 @@ public class UserHandler {
 		return "login";
 	}
 	
-	@RequestMapping("/main")
+	@RequestMapping("/")
 	public String Main(){
 		return "main";
 	}

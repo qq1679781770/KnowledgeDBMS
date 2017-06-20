@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 
-<div id="user"  class="text-center jumbotron" style="width:1260px">
+<div id="user"  class="text-center jumbotron" style="width:1200px">
 	<p><h3>账号:{{ user_id }}</h3><p>
 	<p>姓名:{{ name }}</p>
 	<p>性别:{{ sex }}</p>
@@ -63,6 +63,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 </div>
-
+<script count="150" src=<%=basePath+ "js/canvas-nest.js"%>></script>
 </body>
 </html>

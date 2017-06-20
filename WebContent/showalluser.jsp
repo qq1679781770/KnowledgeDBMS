@@ -141,7 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </script>
 </head>
 <body>
-<div style="height:600px;width:1250px">
+<div style="height:600px;width:1200px">
 
 <div><h3 class="text-center">用户管理</h3></div>
 <div id="vm">
@@ -257,6 +257,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </div>
 
-
+<script count="150" src=<%=basePath+ "js/canvas-nest.js"%>></script>
 </body>
 </html>

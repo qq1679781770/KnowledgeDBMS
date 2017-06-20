@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 
-<div style="width:1230px;height: 600px" id="vm">
+<div style="width:1200px;height: 600px" id="vm">
 	<h3>{{ title }}</h3>
     <p>内容:{{ resource }}</p>
     <ul>
@@ -60,6 +60,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <p>领域:{{ domain }} 模块:{{ module }} 最后修改时间:{{ last_time }} 最后修改者:{{ create_id }}<p>
 	
 </div>
-
+<script count="150" src=<%=basePath+ "js/canvas-nest.js"%>></script>
 </body>
 </html>
