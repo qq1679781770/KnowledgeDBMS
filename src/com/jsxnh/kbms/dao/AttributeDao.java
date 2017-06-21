@@ -33,7 +33,7 @@ public class AttributeDao extends BaseDao{
 	
 	public List<Attribute> findAttributebyId(Integer id){
 		String sql="select * from attribute where id=?";
-		return getJdbcTemplate().query(sql, new AttributeMapper());
+		return getJdbcTemplate().query(sql, new Object[]{id},new AttributeMapper());
 	}
 	
 	

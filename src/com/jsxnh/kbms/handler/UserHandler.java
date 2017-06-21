@@ -104,7 +104,7 @@ public class UserHandler {
 		cus.setSex(json.getInt("sex"));
 		cus.setTel(json.getString("tel"));
 		cus.setEmail(json.getString("email"));
-		cus.setGrade_id(0);
+		cus.setGrade_id(5);
 		cus.setImage("images\\user.png");
 		cus.setDomian_id(domainDao.finddomainBydomain(json.getString("domain")).getId());
 		customerDao.addCustomer(cus);

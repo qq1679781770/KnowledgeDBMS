@@ -24,6 +24,7 @@ import com.jsxnh.kbms.dao.ResourceDao;
 import com.jsxnh.kbms.dao.UncheckDao;
 import com.jsxnh.kbms.entities.Authority;
 import com.jsxnh.kbms.entities.Domain;
+import com.jsxnh.kbms.entities.Module;
 import com.jsxnh.kbms.entities.Rattribute;
 import com.jsxnh.kbms.entities.Resource;
 import com.jsxnh.kbms.entities.Uncheck;
@@ -241,4 +242,50 @@ public class ResourceHandler {
 		return json.toString();
 	}
 	
+	@RequestMapping("/kbms/showmodifyresource/{id}")
+	public ModelAndView showmodifyResource(@PathVariable("id") Integer id){
+		ModelAndView model=new ModelAndView("modifyresource");
+		Resource resource=resourceDao.findResourceByid(id);
+		model.addObject("resource_id",resource.getId());
+		model.addObject("resource", resource.getContent());
+		model.addObject("domain", domainDao.finddomainByid(resource.getDomain_id()).getDomain());
+		model.addObject("module",moduleDao.findModulebyId(resource.getModule_id()).getModule());
+		model.addObject("create_id", resource.getCreate_id());
+		model.addObject("title", resource.getSummary());
+		model.addObject("last_time", resource.getLast_time());		
+		List<Domain> domains=domainDao.listAllDomain();
+		JSONArray jsondomain=new JSONArray();
+		for(Domain domain:domains){
+			jsondomain.put(domain.getDomain());
+		}
+		model.addObject("domains", jsondomain);		
+		List<Module> modules=moduleDao.findModuleByDomain(resource.getDomain_id());
+		JSONArray jsonmodule=new JSONArray();
+		for(Module module:modules){
+			jsonmodule.put(module.getModule());
+		}
+		model.addObject("modules", jsonmodule);		
+		List<Rattribute> rattributes=rattributeDao.findRattributeByResource(id);
+		JSONArray json=new JSONArray();
+		for(Rattribute rattribute:rattributes){
+			JSONObject item=new JSONObject();
+			item.put("id", rattribute.getId());
+			item.put("key", attributeDao.findAttributebyId(rattribute.getAttribute_id()).get(0).getAttribute());
+			item.put("value", rattribute.getValue());
+			json.put(item);
+		}
+		model.addObject("attributes", json);
+		return model;
+	}
+	
+	@RequestMapping(value="/kbms/updateresourcemodelanddomain",method=RequestMethod.POST,produces="application/json;charset=UTF-8",consumes = "application/json")
+	public @ResponseBody String updateresourceModelAndDomain(@RequestBody String str){
+		JSONObject json=new JSONObject(str);
+		Integer resource_id=json.getInt("resource_id");
+		Integer module_id=moduleDao.findModulebymodule(json.getString("module")).getId();
+		Integer domain_id=domainDao.finddomainBydomain(json.getString("domain")).getId();
+		Integer create_id=json.getInt("create_id");
+		resourceDao.updateDomain(domain_id, module_id, resource_id, create_id);
+		return new JSONArray().toString();
+	}
 }

@@ -28,7 +28,7 @@ public class ResourceDao extends BaseDao{
 	}
 	
 	public void updateDomain(Integer domain_id,Integer module_id,Integer id,Integer create_id){
-		String sql="update resource set domain_id=?,module_id,create_id=?,last_time=? where id=?";
+		String sql="update resource set domain_id=?,module_id=?,create_id=?,last_time=? where id=?";
 		getJdbcTemplate().update(sql, new Object[]{domain_id,module_id,create_id,new Date(),id});
 	}
 	
