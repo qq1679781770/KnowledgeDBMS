@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  getJSON('kbms/login',{"id":user_id,"password":password},function(data){
                               if(data=='Y'){
                                   alert("登录成功");
-                            	  var url='<%=basePath+"main"%>';
+                            	  var url='<%=basePath%>';
                               	  location.assign(url);
                               }else{
                                   alert("不存在用户或密码错误");

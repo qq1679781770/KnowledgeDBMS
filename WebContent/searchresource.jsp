@@ -140,7 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           				location.assign('<%=basePath%>'+'lookresource/'+item.id);
                      },
                      modify:function(item){
-                         //$('#myModal').show();
+                    	 location.assign('<%=basePath%>'+'kbms/showmodifyresource/'+item.id);
                      },
                      deleteresource:function(item){
                          $('#delete').click(function(){

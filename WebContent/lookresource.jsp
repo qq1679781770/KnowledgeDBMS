@@ -54,6 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div style="width:1200px;height: 600px" id="vm">
 	<h3>{{ title }}</h3>
     <p>内容:{{ resource }}</p>
+    <h5>属性:</h5>
     <ul>
        <li v-for="item in attributes">{{ item.key }} :{{ item.value }}</li>
     </ul>

@@ -154,6 +154,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     }
 	 				$('#iframe').attr("src","kbms/searchuncheck/1");
 			 	});
+
+		 	   $('#addattribute').click(function(){
+		 	    	if($('#user').text()==' 未登录'){
+                       alert("请先登录");
+                       return;
+                   }
+	 				$('#iframe').attr("src","kbms/showaddattribute");
+			 	});
 			});
 			
         </script>
@@ -218,7 +226,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h5>属性管理</h5>
 		<div>
 			<ul>
-			<li><a href="javascript:(0)">添加</a></li>
+			<li><a href="javascript:(0)" id="addattribute">添加</a></li>
 			<li><a href="javascript:(0)">修改</a></li>
 			<li><a href="javascript:(0)">查看</a></li>
 			</ul>
